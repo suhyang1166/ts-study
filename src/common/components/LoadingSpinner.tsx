@@ -10,7 +10,7 @@ const LoadingSpinner = () => {
                 height: "100vh",
             }}
         >
-            <ScaleLoader color="#67ff2e" height={80} radius={5} width={5} />
+            <ScaleLoader color="#1ed760" height={80} radius={5} width={5} />
         </div>
     );
 };
