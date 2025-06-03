@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet } from "react-router";
 import LibraryHead from "./components/LibraryHead";
 import Library from "./components/Library";
+import Navbar from "./components/Navbar";
 
 const Layout = styled("div")({
     display: "flex",
@@ -16,6 +17,8 @@ const Sidebar = styled("div")(({ theme }) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    gap: "8px",
+    marginRight: "8px",
     [theme.breakpoints.down("sm")]: {
         display: "none",
     },
@@ -27,8 +30,6 @@ const ContentBox = styled(Box)(({ theme }) => ({
     color: theme.palette.text.primary,
     width: "100%",
     padding: "8px",
-    marginBottom: "8px",
-    marginRight: "8px",
 }));
 
 const NavList = styled("ul")({
@@ -76,7 +77,10 @@ const AppLayout = () => {
                 </ContentBox>
                 <Library />
             </Sidebar>
-            <Outlet />
+            <ContentBox>
+                <Navbar />
+                <Outlet />
+            </ContentBox>
         </Layout>
     );
 };

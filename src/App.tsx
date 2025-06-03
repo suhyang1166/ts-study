@@ -15,6 +15,7 @@ const PlaylistDetailPage = React.lazy(
 const PlaylistPage = React.lazy(
     () => import("./pages/PlaylistPage/PlaylistPage")
 );
+const LoginPage = React.lazy(() => import("./pages/Login/Login"));
 
 // 0. 사이드바 있어야함 (플레이이스트, 메뉴)
 // 1. 홈페이지 /
@@ -40,6 +41,7 @@ function App() {
                     />
                     <Route path="playlist" element={<PlaylistPage />} />
                 </Route>
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<div>Page Not Found</div>} />
             </Routes>
         </Suspense>
