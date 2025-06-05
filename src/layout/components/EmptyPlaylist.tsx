@@ -28,9 +28,6 @@ const EmptyPlaylist = () => {
                     marginTop: "20px",
                     fontWeight: 700,
                 }}
-                onClick={() => {
-                    navigate("/login");
-                }}
             >
                 Create Playlist
             </Button>

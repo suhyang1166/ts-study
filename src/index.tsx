@@ -6,15 +6,26 @@ import { BrowserRouter } from "react-router";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
 import { CssBaseline } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const root = ReactDOM.createRoot(
     document.getElementById("content") as HTMLElement
 );
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 1, // 실패 시 최대 1번 재시도 (즉, 총 2번 시도)
+        },
+    },
+});
+
 root.render(
     <BrowserRouter>
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <App />
+            <QueryClientProvider client={queryClient}>
+                <App />
+            </QueryClientProvider>
         </ThemeProvider>
     </BrowserRouter>
 );
