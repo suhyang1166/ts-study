@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router";
 import "./App.css";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import LoadingSpinner from "./common/components/LoadingSpinner";
+import useExchangeToken from "./hooks/useExchangeToken";
 
 const AppLayout = React.lazy(() => import("./layout/AppLayout"));
 const HomePage = React.lazy(() => import("./pages/Homepage/HomePage"));
@@ -15,7 +16,9 @@ const PlaylistDetailPage = React.lazy(
 const PlaylistPage = React.lazy(
     () => import("./pages/PlaylistPage/PlaylistPage")
 );
-const LoginPage = React.lazy(() => import("./pages/Login/Login"));
+const CallbackPage = React.lazy(
+    () => import("./pages/CallbackPage/CallbackPage")
+);
 
 // 0. 사이드바 있어야함 (플레이이스트, 메뉴)
 // 1. 홈페이지 /
@@ -25,9 +28,22 @@ const LoginPage = React.lazy(() => import("./pages/Login/Login"));
 // 5. (모바일버전)플레이리스트 보여주는 페이지 /playlist
 
 function App() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let code = urlParams.get("code");
+    const codeVerifier = localStorage.getItem("code_verifier");
+    const { mutate: exchangeToken } = useExchangeToken();
+
+    useEffect(() => {
+        if (code && codeVerifier) {
+            exchangeToken({ code, codeVerifier });
+        }
+    }, [code, codeVerifier, exchangeToken]);
+
     return (
         <Suspense fallback={<LoadingSpinner />}>
             <Routes>
+                {/* <Route path="/callback" element={<CallbackPage />} /> */}
+
                 <Route path="/" element={<AppLayout />}>
                     <Route index element={<HomePage />} />
                     <Route path="search" element={<SearchPage />} />
@@ -41,7 +57,6 @@ function App() {
                     />
                     <Route path="playlist" element={<PlaylistPage />} />
                 </Route>
-                <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<div>Page Not Found</div>} />
             </Routes>
         </Suspense>
