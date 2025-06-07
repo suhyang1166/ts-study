@@ -43,10 +43,12 @@ export const exchangeToken = async (
     codeVerifier: string
 ): Promise<ExchangeTokenResponse> => {
     try {
-        const url = "https://accounts.spotify.com/authorize/api/token";
+        const url = "https://accounts.spotify.com/api/token";
+
         if (!CLIENT_ID || !REDIRECT_URL) {
-            throw new Error("Missing required parameters");
+            throw new Error("Missing required parameters.");
         }
+
         const body = new URLSearchParams({
             client_id: CLIENT_ID,
             grant_type: "authorization_code",
@@ -62,6 +64,6 @@ export const exchangeToken = async (
         });
         return response.data;
     } catch (error) {
-        throw new Error("fail to fetch token");
+        throw new Error("Failed to fetch token.");
     }
 };

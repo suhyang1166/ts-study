@@ -17,14 +17,8 @@ const CallbackPage = () => {
             exchangeToken(
                 { code, codeVerifier },
                 {
-                    onSuccess: () => {
-                        localStorage.removeItem("code_verifier");
-                        navigate("/", { replace: true });
-                    },
                     onError: (error) => {
-                        // 에러 시에도 홈으로 이동
                         console.error("Token exchange failed:", error);
-                        navigate("/", { replace: true });
                     },
                 }
             );

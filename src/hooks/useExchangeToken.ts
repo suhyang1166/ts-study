@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { ExchangeTokenResponse } from "../models/auth";
 import { exchangeToken } from "../apis/authApi";
+import { ExchangeTokenResponse } from "../models/auth";
 
 const useExchangeToken = () => {
     return useMutation<
@@ -11,6 +11,7 @@ const useExchangeToken = () => {
         mutationFn: ({ code, codeVerifier }) =>
             exchangeToken(code, codeVerifier),
         onSuccess: (data) => {
+            console.log("Token received:", data.access_token);
             localStorage.setItem("access_token", data.access_token);
         },
     });
