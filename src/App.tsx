@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router";
+import { Route, Routes } from "react-router";
 import "./App.css";
 import React, { Suspense, useEffect } from "react";
 import LoadingSpinner from "./common/components/LoadingSpinner";
@@ -15,9 +15,6 @@ const PlaylistDetailPage = React.lazy(
 );
 const PlaylistPage = React.lazy(
     () => import("./pages/PlaylistPage/PlaylistPage")
-);
-const CallbackPage = React.lazy(
-    () => import("./pages/CallbackPage/CallbackPage")
 );
 
 // 0. 사이드바 있어야함 (플레이이스트, 메뉴)
@@ -43,8 +40,6 @@ function App() {
     return (
         <Suspense fallback={<LoadingSpinner />}>
             <Routes>
-                {/* <Route path="/callback" element={<CallbackPage />} /> */}
-
                 <Route path="/" element={<AppLayout />}>
                     <Route index element={<HomePage />} />
                     <Route path="search" element={<SearchPage />} />
