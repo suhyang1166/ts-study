@@ -58,7 +58,11 @@ const Library = () => {
         }
     }, [inView]);
 
-    if (!user) return <EmptyPlaylist />;
+    if (!user) return;
+    <Container>
+        <LibraryHead />
+        <EmptyPlaylist />
+    </Container>;
 
     if (isLoading) {
         return <LoadingSpinner />;
