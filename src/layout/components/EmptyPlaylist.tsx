@@ -1,5 +1,4 @@
 import { Button, styled, Typography } from "@mui/material";
-import { useNavigate } from "react-router";
 
 const PlaylistWrap = styled("div")(({ theme }) => ({
     display: "flex",
@@ -11,8 +10,6 @@ const PlaylistWrap = styled("div")(({ theme }) => ({
 }));
 
 const EmptyPlaylist = () => {
-    const navigate = useNavigate();
-
     return (
         <PlaylistWrap>
             <Typography variant="h2" fontWeight={700} color="secondary">

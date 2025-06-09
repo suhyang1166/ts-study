@@ -58,11 +58,14 @@ const Library = () => {
         }
     }, [inView]);
 
-    if (!user) return;
-    <Container>
-        <LibraryHead />
-        <EmptyPlaylist />
-    </Container>;
+    if (!user) {
+        return (
+            <Container>
+                <LibraryHead />
+                <EmptyPlaylist />
+            </Container>
+        );
+    }
 
     if (isLoading) {
         return <LoadingSpinner />;
@@ -77,17 +80,17 @@ const Library = () => {
     return (
         <Container>
             <LibraryHead />
-            {data && data.pages[0].total !== 0 ? (
+            {!data || data?.pages[0]?.total === 0 ? (
+                <EmptyPlaylist />
+            ) : (
                 <PlaylistContainer>
-                    {data.pages.map((page, idx) => (
+                    {data?.pages.map((page, idx) => (
                         <PlayList key={idx} playlists={page.items} />
                     ))}
                     <div ref={ref}>
                         {isFetchingNextPage && <LoadingSpinner />}
                     </div>
                 </PlaylistContainer>
-            ) : (
-                <EmptyPlaylist />
             )}
         </Container>
     );

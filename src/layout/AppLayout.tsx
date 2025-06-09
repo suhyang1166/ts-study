@@ -2,7 +2,6 @@ import { Box, styled, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet } from "react-router";
-import LibraryHead from "./components/LibraryHead";
 import Library from "./components/Library";
 import Navbar from "./components/Navbar";
 
